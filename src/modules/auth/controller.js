@@ -15,14 +15,14 @@ const login = async (req, res) => {
     username,
   ]);
 
-  if (user && (await bcrypt.compare(password, user.password))) {
+  if (user && (await bcrypt.compare(password.toString(), user.password))) {
     const secret = env.SECRET_KEY;
     const payload = {
       userId: user.id,
       email: user.email,
     };
 
-    const token = jwt.sign(payload, secret, { expiresIn: '2h' });
+    const token = jwt.sign(payload, secret, { expiresIn: "2h" });
 
     return res.json({ token });
   }

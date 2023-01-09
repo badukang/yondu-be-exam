@@ -16,8 +16,7 @@ const create = async (req, res) => {
   const body = req.body;
 
   let userData = {
-    username: body.username,
-    email: body.email,
+    ...body,
     password: bcrypt.hashSync(body.password, 10),
   };
   try {
