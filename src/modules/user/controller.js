@@ -11,6 +11,7 @@ const index = async (_, res) => {
   }
   return;
 };
+
 const create = async (req, res) => {
   const body = req.body;
 
@@ -23,10 +24,12 @@ const create = async (req, res) => {
     const result = await userModel.create(userData);
     res.json(result);
   } catch (err) {
+    console.log(err);
     res.status(401).json(err.message);
   }
   return;
 };
+
 const update = async (req, res) => {
   const body = req.body;
   const params = req.params;
@@ -41,15 +44,19 @@ const update = async (req, res) => {
     const [results] = await userModel.update({ ...body }, whereOption);
 
     if (results) {
-      res.status(202).json("success update");
+      res
+        .status(202)
+        .json({ id: whereOption.id, message: "update successful" });
+      return;
     }
-    errorMessage = "update unsuccessful";
+    errorMessage = { message: "update unsuccessful" };
   } catch (err) {
     console.log(err);
     errorMessage = err.message;
   }
   res.status(401).json(errorMessage);
 };
+
 const destroy = async (req, res) => {
   const params = req.params;
 
@@ -60,11 +67,12 @@ const destroy = async (req, res) => {
 
   try {
     const results = await userModel.destroy(whereOption);
-    
+
     if (results) {
-      res.status(202).json("success delete");
+      res.status(202).json({ id: whereOption.id, message: "success delete" });
+      return;
     }
-    errorMessage = "destroy unsuccessful";
+    errorMessage = { message: "destroy unsuccessful" };
   } catch (err) {
     console.log(err);
     errorMessage = err.message;

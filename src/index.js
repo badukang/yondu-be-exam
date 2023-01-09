@@ -6,6 +6,7 @@ dotenv.config({ path: ".env" });
 
 //load server
 const port = process.env.PORT;
-server.listen(port, () => {
+
+module.exports = server.listen(port, () => {
   console.log(`server running`);
 });
