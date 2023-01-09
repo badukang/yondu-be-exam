@@ -1,10 +1,11 @@
-require("./env/loader");
 const server = require("./server");
 
-//load port
-const port = process.env.PORT || 8080;
+//load env
+const dotenv = require("dotenv");
+dotenv.config({ path: ".env" });
 
 //load server
+const port = process.env.PORT;
 server.listen(port, () => {
   console.log(`server running`);
 });
