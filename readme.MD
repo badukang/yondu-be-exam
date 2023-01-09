@@ -18,6 +18,13 @@ npm i sequelize-cli -g
 npm i
 ```
 
+### update .env
+
+```
+PORT: 3000
+SECRET_KEY: {string}
+```
+
 ## Database
 
 `create mysql database`
