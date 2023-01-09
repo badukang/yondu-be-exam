@@ -1,5 +1,5 @@
-import server from "./server.js";
-import "./env/loader.js";
+require("./env/loader");
+const server = require("./server");
 
 //load port
 const port = process.env.PORT || 8080;
